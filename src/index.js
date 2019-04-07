@@ -20,6 +20,15 @@ function importQuote(obj) {
       <button class='btn-danger'>Delete</button>
       <button class='btn-info'>Edit</button>
     </blockquote>
+    <form id="update-quote-form" style="display: none">
+        <div class="form-group">
+            <input type="text" class="form-control" id="updated-quote" value="${obj.quote}" placeholder="Quote">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="author" value="${obj.author}" placeholder="Author">
+        </div>
+        <button type="submit" class="btn btn-info">Update</button>
+    </form>
   </li>`
 };
 
@@ -69,24 +78,12 @@ const likeAndDeleteListener = () => {
             case 'btn-success':
                 likeQuote(e);
             case 'btn-info':
-                const quoteObj = {
-                    quote: e.target.parentElement.querySelector('p').textContent,
-                    author: e.target.parentElement.querySelector('footer').textContent
-                };
-                // console.log(quoteObj);
-                quoteLi = e.target.parentElement.parentElement;
-                e.target.parentElement.remove();
-                quoteLi.innerHTML += updateQuoteForm(quoteObj);
+                const showQuote = e.target.parentElement
+                showQuote.style.display = "none"
+                const updateForm = e.target.parentElement.parentElement.querySelector('form')
+                updateForm.style.display = "block"
                 updateListener();
-                console.log(quoteLi)
         }
-        // if (e.target.className === 'btn-danger') {
-            
-        // }else if (e.target.className === 'btn-success') {
-        //     likeQuote(e)
-        // }else if (e.target.className === 'btn-info') {
-        //     console.log('hiii')
-        // }
     })
 }
 
@@ -124,27 +121,31 @@ function incrementLikesInDB(id, likeCount) {
     })
 }
 
-const updateQuoteForm = (quoteObj) => {
-    return `<form id="update-quote-form">
-        <div class="form-group">
-            <input type="text" class="form-control" id="new-quote" value="${quoteObj.quote}">
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" id="author" value="${quoteObj.author}">
-        </div>
-        <button type="submit" class="btn btn-info">Update</button>
-    </form>`
-}
-
 function updateListener() {
     document.getElementById('update-quote-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        quoteLi = e;
-        const quoteObj = {
-            quote: quoteLi.target["new-quote"].value,
-            author: quoteLi.target.author.value,
-            id: quoteLi.target.id.value
+        const quoteShow = e.target.parentElement.querySelector('blockquote')
+        quoteShow.style.display = "block"
+        const updateForm = e.target
+        updateForm.style.display = "none"
+        quoteLi = e
+        const updatedQuoteObj = {
+            quote: e.target["updated-quote"].value,
+            author: e.target.author.value,
+            id: e.target.parentElement.dataset.id
         };
-        console.log(quoteObj.target.parentElement)
+        quoteShow.querySelector('p').innerText = updatedQuoteObj.quote;
+        quoteShow.querySelector('footer').innerText = updatedQuoteObj.author;
+        updateInDB(updatedQuoteObj);
     })
 }
+
+function updateInDB (quoteObj) {
+    fetch(`http://localhost:3000/quotes/${quoteObj.id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'applicatoin/json'
+        },
+        body: JSON.stringify({quote: quoteObj.quote, author: quoteObj.author})
+    })}

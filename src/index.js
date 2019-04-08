@@ -75,17 +75,36 @@ const likeAndDeleteListener = () => {
         switch (e.target.className) {
             case 'btn-danger':
                 deleteQuote(e);
+                break;
             case 'btn-success':
                 likeQuote(e);
+                break;
             case 'btn-info':
                 const showQuote = e.target.parentElement
                 showQuote.style.display = "none"
                 const updateForm = e.target.parentElement.parentElement.querySelector('form')
                 updateForm.style.display = "block"
                 updateListener();
+                break;
         }
     })
 }
+
+// const likeAndDeleteListener = () => {
+//     quoteList.addEventListener('click', function(e) {
+//         if (e.target.className === 'btn-danger') {
+//             deleteQuote(e);}
+//         if (e.target.className === 'btn-success') {
+//             likeQuote(e);}
+//         if (e.target.className === 'btn-info') {
+//             const showQuote = e.target.parentElement
+//             showQuote.style.display = "none"
+//             const updateForm = e.target.parentElement.parentElement.querySelector('form')
+//             updateForm.style.display = "block"
+//             updateListener();
+//         }
+//     })
+// }
 
 const deleteQuote = (e) => {
     // quoteList.addEventListener('click', function(e) {
@@ -122,7 +141,7 @@ function incrementLikesInDB(id, likeCount) {
 }
 
 function updateListener() {
-    document.getElementById('update-quote-form').addEventListener('submit', function(e) {
+    quoteList.addEventListener('submit', function(e) {
         e.preventDefault();
         const quoteShow = e.target.parentElement.querySelector('blockquote')
         quoteShow.style.display = "block"

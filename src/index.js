@@ -91,7 +91,7 @@ window.addEventListener('DOMContentLoaded', () => {
   quoteUl.addEventListener('click', (event) => {
       if (event.target.className == 'btn-danger') {
       deleteQuote(event.target.parentElement.parentElement.dataset.id)
-      event.target.parentElement.parentElement.delete();
+      event.target.parentElement.parentElement.remove();
     } else if (event.target.className == 'btn-success') {
       likeCount = parseInt(event.target.parentElement.querySelector('span').innerText);
       fetch(`http://localhost:3000/quotes/${event.target.parentElement.parentElement.dataset.id}`, {

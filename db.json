@@ -25,7 +25,7 @@
       "author": "Confucius"
     },
     {
-      "id": 5 ,
+      "id": 5,
       "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
       "likes": 1,
       "author": "Winston Churchhill"
@@ -35,7 +35,47 @@
       "quote": "Perseverance is the hard work you do after you get tired of doing the hard work you already did.",
       "likes": 1,
       "author": "Newt Gingrich"
+    },
+    {
+      "quote": "Learn. Love. Code.",
+      "author": "Flatiron School",
+      "id": 7
+    },
+    {
+      "author": {},
+      "id": 8
+    },
+    {
+      "author": {},
+      "id": 9
+    },
+    {
+      "author": {},
+      "id": 10
+    },
+    {
+      "author": {},
+      "id": 11
+    },
+    {
+      "quote": "Learn. Love. Code.",
+      "author": "Flatiron School",
+      "id": 12
+    },
+    {
+      "quote": "big butts",
+      "author": "mc hammer",
+      "id": 13
+    },
+    {
+      "quote": "Good work",
+      "author": "James",
+      "id": 14
+    },
+    {
+      "quote": "",
+      "author": "",
+      "id": 15
     }
-
   ]
 }

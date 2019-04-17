@@ -15,7 +15,7 @@ const createQuoteCard = (quote) => {
     <p class="mb-0">${quote.quote}</p>
     <footer class="blockquote-footer">${quote.author}</footer>
     <br>
-    <button class='btn-success' data-likes=${quote.likes}>Likes: <span data-likes=${quote.likes}>${quote.likes}</span></button>
+    <button class='btn-success' data-likes=${quote.likes} data-id=${quote.id}>Likes: <span>${quote.likes}</span></button>
     <button class='btn-danger' data-id=${quote.id}>Delete</button>
   </blockquote>
 </li>`
@@ -82,7 +82,7 @@ const updateLikeCountServer = (quoteId, likeCount) => {
       'Accept': 'application/json'
     },
     body: JSON.stringify({
-      likes: parseInt(likeCount)
+      likes: likeCount
     })
   }).then((response) => {
     return response.json()
@@ -102,14 +102,22 @@ ulTag.addEventListener('click', (event) => {
       }
 
     else if (event.target.className === "btn-success") {
-      let likeCount = parseInt(event.target.dataset.likes)
+      let likeCount = parseInt(event.target.querySelector('span').innerText)
       likeCount++;
-      const quoteId = parseInt(event.target.dataset.id);
-      updateLikeCountServer(quoteId, likeCount);
 
-      const span = event.target.firstElementChild
+      const quoteId = parseInt(event.target.dataset.id);
+      // debugger;
+
+      updateLikeCountServer(quoteId, likeCount).then((response) => {
         // debugger;
-      span.dataset.likes = likeCount;
+        const span = event.target.firstElementChild
+        span.innerText = response.likes;
+
+      })
+
+
+        // debugger;
+
     }
     })
 

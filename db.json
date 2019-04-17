@@ -3,7 +3,7 @@
     {
       "id": 5,
       "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
-      "likes": 1,
+      "likes": 23,
       "author": "Winston Churchhill"
     },
     {
@@ -11,12 +11,6 @@
       "quote": "Perseverance is the hard work you do after you get tired of doing the hard work you already did.",
       "likes": 1,
       "author": "Newt Gingrich"
-    },
-    {
-      "quote": "yo yo yo yo and a bottle of rum",
-      "author": "pirate",
-      "likes": 0,
-      "id": 7
     },
     {
       "quote": "rrrrrrrr",
